@@ -1,33 +1,48 @@
-<div class="items-list">
-  <h2>Materials</h2>
+<!-- Desktop/Table Version -->
+<table class="material-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Quantity</th>
+      <th>Unit</th>
+      <th>Location</th>
+      <th>Description</th>
+      <th>Added On</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let material of materials">
+      <td>{{ material.name }}</td>
+      <td>{{ material.category }}</td>
+      <td>{{ material.quantity }}</td>
+      <td>{{ material.unit }}</td>
+      <td>{{ material.location }}</td>
+      <td>{{ material.description }}</td>
+      <td *ngIf="material.created_at">{{ material.created_at | date }}</td>
+      <td>
+        <button class="edit-btn" (click)="editMaterial(material)">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-  <table class="material-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Quantity</th>
-        <th>Unit</th>
-        <th>Location</th>
-        <th>Description</th>
-        <th>Added On</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let material of materials">
-        <td>{{ material.name }}</td>
-        <td>{{ material.category }}</td>
-        <td>{{ material.quantity }}</td>
-        <td>{{ material.unit }}</td>
-        <td>{{ material.location }}</td>
-        <td>{{ material.description }}</td>
-        <td *ngIf="material.created_at">{{ material.created_at | date }}</td>
-        <td>
-          <button class="edit-btn" (click)="editMaterial(material)">Edit</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
+<!-- Mobile Version (Card Layout) -->
+<div class="material-list">
+  <div *ngFor="let material of materials" class="material-card">
+    <div class="item-header">
+      <h3>{{ material.name }}</h3>
+      <p>Quantity: {{ material.quantity }} {{ material.unit }}</p>
+    </div>
+
+    <div class="item-details">
+      <p><strong>Category:</strong> {{ material.category }}</p>
+      <p><strong>Location:</strong> {{ material.location }}</p>
+      <p><strong>Description:</strong> {{ material.description }}</p>
+      <p *ngIf="material.created_at"><strong>Added On:</strong> {{ material.created_at | date }}</p>
+    </div>
+
+    <button class="edit-btn" (click)="editMaterial(material)">Edit</button>
+  </div>
 </div>
