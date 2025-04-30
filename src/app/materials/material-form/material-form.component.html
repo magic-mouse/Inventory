@@ -1,0 +1,49 @@
+<app-material-form></app-material-form>
+
+<form [formGroup]="materialForm" (ngSubmit)="submit()" class="form">
+    <label>Material Name:
+      <input formControlName="name" type="text" />
+    </label>
+  
+    <label>Material Type:
+      <input formControlName="type" type="text" />
+    </label>
+  
+    <label>Quantity Available:
+      <input formControlName="quantity" type="number" />
+    </label>
+  
+    <label>Unit of Measurement:
+      <input formControlName="unit" type="text" />
+    </label>
+  
+    <label>Specifications:
+      <input formControlName="specifications" type="text" />
+    </label>
+  
+    <label>Cost per Unit:
+      <input formControlName="cost" type="text" />
+    </label>
+  
+    <label>Supplier Name:
+      <input formControlName="supplier" type="text" />
+    </label>
+  
+    <label>Date Acquired:
+      <input formControlName="acquired" type="date" />
+    </label>
+  
+    <label>Material Photo:
+      <input type="file" (change)="onFileChange($event)" />
+    </label>
+    <div *ngIf="imagePreview" style="margin-top: 10px;">
+      <img [src]="imagePreview" alt="Preview" style="max-width: 100%; height: auto;" />
+    </div>
+  
+    <label>Orders (optional):
+      <input formControlName="orders" type="text" />
+    </label>
+  
+    <button type="submit" [disabled]="materialForm.invalid">Save Material</button>
+  </form>
+  
