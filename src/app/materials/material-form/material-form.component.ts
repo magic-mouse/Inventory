@@ -1,51 +1,35 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ItemService } from '../../item.service'; 
+import { Material } from '../../material.model'; 
 import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-material-form',
-  templateUrl: './material-form.component.html',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  styleUrls: ['./material-form.component.css']
+  imports: [ CommonModule ],
+  templateUrl: './material-form.component.html',
+  styleUrls: ['./material-form.component.scss']
 })
-export class MaterialFormComponent {
-  materialForm: FormGroup;
-  imagePreview: string | ArrayBuffer | null = null;
+export class MaterialFormComponent implements OnInit {
+  materials: Material[] = [];  // Array of materials
 
-  constructor(private fb: FormBuilder) {
-    this.materialForm = this.fb.group({
-      name: ['', Validators.required],
-      type: ['', Validators.required],
-      quantity: [0, [Validators.required, Validators.min(0)]],
-      unit: ['', Validators.required],
-      specifications: [''],
-      cost: ['', Validators.required],
-      supplier: [''],
-      acquired: ['', Validators.required],
-      photo: [null],
-      orders: ['']
+  constructor(private itemService: ItemService) { }
+
+  ngOnInit(): void {
+    this.loadMaterials();  // Fetch materials when component initializes
+  }
+
+  // Method to load materials
+  loadMaterials() {
+    this.itemService.getMaterials().then(data => {
+      this.materials = data.data;  // Assuming data returned matches the Material interface
+      console.log(this.materials);  // For debugging
     });
   }
 
-  onFileChange(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.materialForm.patchValue({ photo: file });
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
-  submit() {
-    if (this.materialForm.valid) {
-      const formData = this.materialForm.value;
-      console.log('Form submitted:', formData);
-      // You can emit, send to a service, or post to a server here
-    }
+  editMaterial(material: Material) {
+    // Open a modal, navigate to another page, or show a form for editing the material
+    console.log('Editing material:', material);
   }
 }

@@ -1,19 +1,29 @@
-<!-- item-grid.component.html -->
-<form [formGroup]="form">
-  <table>
+<table>
     <thead>
       <tr>
         <th>Name</th>
         <th>Quantity</th>
+        <th>Actions</th>
       </tr>
     </thead>
-    <tbody formArrayName="items">
-      <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
-        <td><input formControlName="name" /></td>
-        <td><input type="number" formControlName="quantity" /></td>
+    <tbody>
+      <tr *ngFor="let item of items; let i = index">
+        <ng-container *ngIf="editIndex === i; else readRow">
+          <td><input [formControl]="nameControl" /></td>
+          <td><input type="number" [formControl]="numberControl" /></td>
+          <td>
+            <button (click)="saveEdit()">Save</button>
+            <button (click)="cancelEdit()">Cancel</button>
+          </td>
+        </ng-container>
+        <ng-template #readRow>
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td><button (click)="startEdit(i)">Edit</button></td>
+        </ng-template>
       </tr>
     </tbody>
   </table>
-</form>
 
-<button (click)="logValues()">Log Form Values</button>
+  <button (click)="loadMachines()">Load Machines</button>
+  

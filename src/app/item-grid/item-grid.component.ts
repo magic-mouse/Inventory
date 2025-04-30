@@ -1,47 +1,62 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ItemService } from '../item.service';
 
 @Component({
   selector: 'app-item-grid',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './item-grid.component.html',
-  styleUrl: './item-grid.component.scss'
 })
 export class ItemGridComponent {
+  items = [
+    { id: 1, name: 'Apple', quantity: 10 },
+    { id: 2, name: 'Banana', quantity: 5 }
+  ];
 
-  form: FormGroup;
+  editIndex: number | null = null;
+  editForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      items: this.fb.array([]),
+  constructor(private fb: FormBuilder, private machines: ItemService) {}
+
+
+  loadMachines(){
+    this.machines.getMaterials().then((data) => {
+      console.log(data); // Logs the fetched data
+    }).catch((error) => {
+      console.error('Error fetching data:', error); // Logs any errors
     });
-
-    // Dummy data
-    const data = [
-      { name: 'Apple', quantity: 10 },
-      { name: 'Banana', quantity: 5 },
-      { name: 'Orange', quantity: 7 },
-    ];
-
-    this.setItems(data);
   }
 
-  get items(): FormArray {
-    return this.form.get('items') as FormArray;
+  startEdit(index: number) {
+    const item = this.items[index];
+    this.editForm = this.fb.group({
+      name: [item.name],
+      quantity: [item.quantity]
+    });
+    this.editIndex = index;
   }
 
-  setItems(data: any[]) {
-    const itemsFGs = data.map(item =>
-      this.fb.group({
-        name: [item.name],
-        quantity: [item.quantity],
-      })
-    );
-    this.form.setControl('items', this.fb.array(itemsFGs));
+  saveEdit() {
+    if (this.editForm.valid && this.editIndex !== null) {
+      this.items[this.editIndex] = {
+        ...this.items[this.editIndex],
+        ...this.editForm.value
+      };
+      this.editIndex = null;
+    }
   }
 
-  logValues() {
-    console.log(this.form.value);
+  cancelEdit() {
+    this.editIndex = null;
+  }
+
+  get nameControl(): FormControl {
+    return this.editForm.get('name') as FormControl;
+  }
+
+  get numberControl(): FormControl {
+    return this.editForm.get("quantity") as FormControl
   }
 }
-

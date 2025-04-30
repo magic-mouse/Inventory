@@ -1,33 +1,50 @@
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 400px;
-    margin: auto;
+.material-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
   }
-  
-  label {
-    display: flex;
-    flex-direction: column;
-    font-weight: 500;
+
+  th {
+    background-color: #f4f4f4;
+    font-weight: bold;
   }
-  
-  input[type="text"],
-  input[type="number"],
-  input[type="date"],
-  input[type="file"] {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+
+  td {
+    background-color: #fff;
   }
-  
-  button {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #2196f3;
+
+  .edit-btn {
+    padding: 8px 16px;
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #0056b3;
+    }
   }
-  
+}
+
+// Mobile responsiveness
+@media (max-width: 600px) {
+  .material-table {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 8px;
+  }
+
+  .edit-btn {
+    padding: 6px 12px;
+  }
+}
