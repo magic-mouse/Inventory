@@ -9,9 +9,16 @@ export interface Material {
     price: number;
     created_at?: string;
   }
-  
+
   export interface Category {
     id?: number;
     name: string;
-    created_at?: string; 
+    created_at?: string;
+  }
+
+  export interface Attribute {
+    id?: number;
+    name: string;
+    type: string;
+    created_at?: string;
   }

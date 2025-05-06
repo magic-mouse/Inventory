@@ -8,7 +8,8 @@ import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-add-category',
-  standalone: true, 
+  standalone: true,
+  providers: [MessageService],
   imports: [CommonModule, ReactiveFormsModule, RouterLink, ToastModule],
   templateUrl: './add-category.component.html',
   styleUrl: './add-category.component.scss'
@@ -49,38 +50,38 @@ export class AddCategoryComponent implements OnInit {
     const { error } = await this.items.addAttribute(payload);
 
     if (error) {
-      alert('Failed to add ' + this.type + ': ' + error.message);
+      this.showError(error.message ?? 'Failed to add attribute');
     } else {
-      alert(`${this.type} added!`);
+      this.showSuccess();
       this.loadList();
       this.attributeForm.reset();
     }
   }
 
   loadList(){
-    this.items.getAttributes(this.type).then(result => { 
+    this.items.getAttributes(this.type).then(result => {
       if (result) {
         this.attributes = result.data ?? [];
       } else {
-        alert('Failed to load data');
+        this.showError("Fail to load data!")
       }
     });
   }
 
-  showSuccess() {
+  showSuccess(detail?: string) {
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
-      detail: 'Item added successfully!',
+      detail: detail ?? 'Item added successfully!',
       life: 3000, // Optional: how long it should stay on screen
     });
   }
 
-  showError() {
+  showError(detail?: string) {
     this.messageService.add({
       severity: 'error',
       summary: 'Error',
-      detail: 'Something went wrong.',
+      detail: detail ?? 'Something went wrong.',
       life: 3000,
     });
   }

@@ -1,17 +1,9 @@
-<p-toast></p-toast>
-<div class="side-layout">
-    <nav class="side-nav">
-      <a routerLink="/" class="nav-link">🏠 Home</a>
-      <a routerLink="/item" class="nav-link">📦 Items</a>
-      <a routerLink="/add-item" class="nav-link">➕ Add Item</a>
-      <a routerLink="/add-category" class="nav-link" >📁 Add Category</a>
-      <a [routerLink]="['/add-attribute', 'location']" class="nav-link">Add Location</a>
-      <a [routerLink]="['/add-attribute', 'category']" class="nav-link">Add Category</a>
-      <a [routerLink]="['/add-attribute', 'unit']" class="nav-link">Add Unit</a>
-    </nav>
+<p-toast />
+<p-menubar [model]="items" >
+</p-menubar>
     <main class="content-area">
         <div class="content-wrapper">
     <router-outlet />
 </div>
 </main>
-</div>
+

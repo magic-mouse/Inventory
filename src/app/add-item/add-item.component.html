@@ -1,10 +1,32 @@
 <form [formGroup]="materialForm" (ngSubmit)="submit()">
-    <input placeholder="Name" formControlName="name" />
-    <input placeholder="Category" formControlName="category" />
-    <input type="number" placeholder="Quantity" formControlName="quantity" />
-    <input type="number" placeholder="Price" formControlName="price" />
-    <input placeholder="Unit" formControlName="unit" />
-    <input placeholder="Location" formControlName="location" />
-    <input placeholder="Description" formControlName="description" />
-    <button type="submit" [disabled]="!this.materialForm.dirty">Add Material</button>
-  </form>
+  <p-floatlabel>
+    <input id="name" formControlName="name" />
+    <label for="name">Name</label>
+  </p-floatlabel>
+
+  <p-floatlabel>
+  <select id="category" formControlName="category">
+    <option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</option>
+  </select>
+    <label for="category">Category</label>
+  </p-floatlabel>
+  <p-floatlabel>
+    <p-inputnumber class="p-form" inputId="quantity" id="quantity" formControlName="quantity" />
+    <label for="quantity">Quantity</label>
+  </p-floatlabel>
+  <p-floatlabel>
+    <input type="number" id="Price" formControlName="price" />
+    <label for="Price">Price</label>
+  </p-floatlabel>
+
+  <select formControlName="unit">
+    <option *ngFor="let unit of units" [value]="unit.name">{{ unit.name }}</option>
+  </select>
+
+  <select formControlName="location">
+    <option *ngFor="let loc of locations" [value]="loc.name">{{ loc.name }}</option>
+  </select>
+
+  <input placeholder="Description" formControlName="description" />
+  <button type="submit" [disabled]="!materialForm.dirty">Add Material</button>
+</form>

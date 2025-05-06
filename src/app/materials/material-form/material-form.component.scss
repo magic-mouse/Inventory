@@ -1,104 +1,26 @@
 /* Default Desktop/Table Style */
 @media (min-width: 601px) {
-.material-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-
-  th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-  }
-
-  td {
-    background-color: #fff;
-  }
-
-  .edit-btn {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-a
-    &:hover {
-      background-color: #0056b3;
-    }
-  }
-}
-}
-
-/* Mobile (phone) Style */
-@media (max-width: 600px) {
   .material-table {
-    display: none; /* Hide the table on mobile screens */
-  }
-
-  .material-list {
-    display: block;
-  }
-
-  .material-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 10px 0;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  .material-card .item-header h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-
-  .material-card .item-header p {
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
-
-  .material-card .item-details p {
-    font-size: 12px;
-    margin: 5px 0;
-  }
-
-  .material-card .edit-btn {
     width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    border-collapse: collapse;
+    margin: 20px 0;
 
-    &:hover {
-      background-color: #0056b3;
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
     }
-  }
 
-  /* Optional: Increase spacing for readability */
-  .material-card .item-details p {
-    margin-bottom: 10px;
-  }
-
-  /* Responsive breakpoints */
-  @media (max-width: 400px) {
-    .material-card .item-header h3 {
-      font-size: 16px;
+    th {
+      font-weight: bold;
     }
-    .material-card .item-header p,
-    .material-card .item-details p {
-      font-size: 12px;
+
+
+    .edit-btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
   }
 }

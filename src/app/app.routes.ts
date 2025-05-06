@@ -19,16 +19,12 @@ export const routes: Routes = [
       component: AddItemComponent
     },
     {
-      path: 'add-category',
-      component: AddCategoryComponent
-    },
-    {
       path: 'add-attribute/:type',
       component: AddCategoryComponent
     },
-    { 
-      path: 'edit-attribute/:type/:id', 
-      component: EditAttributeComponent 
+    {
+      path: 'edit-attribute/:type/:id',
+      component: EditAttributeComponent
     }
 
   ];
