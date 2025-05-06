@@ -4,11 +4,12 @@ import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { ItemService } from '../item.service';
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-add-category',
   standalone: true, 
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, ToastModule],
   templateUrl: './add-category.component.html',
   styleUrl: './add-category.component.scss'
 })
