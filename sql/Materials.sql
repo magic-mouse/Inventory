@@ -9,3 +9,28 @@ CREATE TABLE materials (
     created_at TIMESTAMP DEFAULT now()        -- Timestamp for tracking when added
 );
 ALTER TABLE materials ADD COLUMN price NUMERIC(10, 2);
+
+UPDATE materials SET category = NULL, unit = NULL, location = NULL;
+-- First make sure columns exist and are the correct type (int or uuid)
+-- Assuming they are INTEGER and nullable (optional)
+ALTER TABLE materials
+ALTER COLUMN category TYPE INTEGER USING category::integer;
+
+ALTER TABLE materials
+ALTER COLUMN unit TYPE INTEGER USING unit::integer;
+
+ALTER TABLE materials
+ALTER COLUMN location TYPE INTEGER USING location::integer;
+
+
+ALTER TABLE materials
+  ADD CONSTRAINT fk_material_category
+    FOREIGN KEY (category) REFERENCES attributes(id) ON DELETE SET NULL;
+
+ALTER TABLE materials
+  ADD CONSTRAINT fk_material_unit
+    FOREIGN KEY (unit) REFERENCES attributes(id) ON DELETE SET NULL;
+
+ALTER TABLE materials
+  ADD CONSTRAINT fk_material_location
+    FOREIGN KEY (location) REFERENCES attributes(id) ON DELETE SET NULL;

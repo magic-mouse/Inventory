@@ -16,9 +16,14 @@ export class ItemService {
   }
 
   async getMaterials(): Promise<any> {
-    return this.supabase
-         .from('materials')
-         .select('*');
+      return this.supabase
+        .from('materials')
+        .select(`
+    *,
+    category:category (*),
+    unit:unit (*),
+    location:location (*)
+  `);
    }
 
    async addMaterial(material: Material) {
@@ -27,10 +32,6 @@ export class ItemService {
       .insert([material]);
   }
 
-  async addCategory(category: Category) {
-    return this.supabase.from('category')
-    .insert([category])
-  }
 
   async addAttribute(attribute: { name: string; type: string }) {
     return this.supabase.from('attributes').insert(attribute);

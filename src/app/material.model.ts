@@ -1,11 +1,11 @@
 export interface Material {
     id?: number;
     name: string;
-    category: string;
+    category?: Attribute;
     quantity: number;
-    unit: string;
-    location: string;
-    description: string;
+    unit?: Attribute;
+    location?: Attribute;
+    description?: string;
     price: number;
     created_at?: string;
   }

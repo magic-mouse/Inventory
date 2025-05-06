@@ -1,3 +1,4 @@
+<p-toast/>
 <form [formGroup]="materialForm" (ngSubmit)="submit()">
   <p-floatlabel>
     <input id="name" formControlName="name" />
@@ -6,7 +7,7 @@
 
   <p-floatlabel>
   <select id="category" formControlName="category">
-    <option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</option>
+    <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
   </select>
     <label for="category">Category</label>
   </p-floatlabel>
@@ -20,13 +21,13 @@
   </p-floatlabel>
 
   <select formControlName="unit">
-    <option *ngFor="let unit of units" [value]="unit.name">{{ unit.name }}</option>
+    <option *ngFor="let unit of units" [value]="unit.id">{{ unit.name }}</option>
   </select>
 
   <select formControlName="location">
-    <option *ngFor="let loc of locations" [value]="loc.name">{{ loc.name }}</option>
+    <option *ngFor="let loc of locations" [value]="loc.id">{{ loc.name }}</option>
   </select>
 
   <input placeholder="Description" formControlName="description" />
-  <button type="submit" [disabled]="!materialForm.dirty">Add Material</button>
+  <button type="submit" [disabled]="!materialForm.dirty && !this.materialForm.valid">Add Material</button>
 </form>

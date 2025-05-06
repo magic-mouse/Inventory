@@ -16,12 +16,12 @@
   <tbody>
     <tr *ngFor="let material of materials">
       <td>{{ material.name }}</td>
-      <td>{{ material.category }}</td>
+      <td>{{ material.category?.name ?? 'NC' }}</td>
       <td>{{ material.quantity }}</td>
-      <td>{{ material.unit }}</td>
+      <td>{{ material.unit?.name ?? 'NU' }}</td>
       <td>{{ material.price | currency }}</td>
       <td>{{ (material.quantity * material.price) | currency }}</td>
-      <td>{{ material.location }}</td>
+      <td>{{ material.location?.name ?? 'NL' }}</td>
       <td>{{ material.description }}</td>
       <td *ngIf="material.created_at">{{ material.created_at | date }}</td>
       <td>
