@@ -1,4 +1,3 @@
-<!-- Desktop/Table Version -->
 <table class="material-table">
   <thead>
     <tr>
@@ -6,6 +5,8 @@
       <th>Category</th>
       <th>Quantity</th>
       <th>Unit</th>
+      <th>Price</th>
+      <th>Total</th>
       <th>Location</th>
       <th>Description</th>
       <th>Added On</th>
@@ -18,6 +19,8 @@
       <td>{{ material.category }}</td>
       <td>{{ material.quantity }}</td>
       <td>{{ material.unit }}</td>
+      <td>{{ material.price | currency }}</td>
+      <td>{{ (material.quantity * material.price) | currency }}</td>
       <td>{{ material.location }}</td>
       <td>{{ material.description }}</td>
       <td *ngIf="material.created_at">{{ material.created_at | date }}</td>
@@ -25,24 +28,15 @@
         <button class="edit-btn" (click)="editMaterial(material)">Edit</button>
       </td>
     </tr>
+
+    <!-- Summary row -->
+    <tr class="summary-row">
+      <td colspan="2"><strong>Totals:</strong></td>
+      <td><strong>{{ totalQuantity() }}</strong></td>
+      <td></td>
+      <td><strong>{{ averagePrice() | currency }}</strong></td>
+      <td><strong>{{ totalValue() | currency }}</strong></td>
+      <td colspan="4"></td>
+    </tr>
   </tbody>
 </table>
-
-<!-- Mobile Version (Card Layout) -->
-<div class="material-list">
-  <div *ngFor="let material of materials" class="material-card">
-    <div class="item-header">
-      <h3>{{ material.name }}</h3>
-      <p>Quantity: {{ material.quantity }} {{ material.unit }}</p>
-    </div>
-
-    <div class="item-details">
-      <p><strong>Category:</strong> {{ material.category }}</p>
-      <p><strong>Location:</strong> {{ material.location }}</p>
-      <p><strong>Description:</strong> {{ material.description }}</p>
-      <p *ngIf="material.created_at"><strong>Added On:</strong> {{ material.created_at | date }}</p>
-    </div>
-
-    <button class="edit-btn" (click)="editMaterial(material)">Edit</button>
-  </div>
-</div>

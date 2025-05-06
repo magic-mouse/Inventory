@@ -1,0 +1,5 @@
+<h2>Edit {{ type }}</h2>
+<form [formGroup]="attributeForm" (ngSubmit)="save()">
+  <input placeholder="Name" formControlName="name" />
+  <button type="submit" [disabled]="!attributeForm.dirty">Save</button>
+</form>

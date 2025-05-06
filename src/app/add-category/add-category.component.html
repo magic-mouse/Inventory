@@ -1,0 +1,15 @@
+<H1>Add {{ type }}</H1>
+<form [formGroup]="attributeForm" (ngSubmit)="submit()">
+    <input placeholder="Name" formControlName="name" />
+    <button type="submit" [disabled]="!this.attributeForm.dirty">Add {{ type }}</button>
+  </form>
+
+  <button (click)="showSuccess()">Show Success</button>
+<button (click)="showError()">Show Error</button>
+
+  <table>
+    <tr *ngFor="let attribute of attributes"> 
+      <td>{{ attribute.name }} </td>
+      <td><a [routerLink]="['/edit-attribute', type, attribute.id ]" class="nav-link">Edit </a> </td>
+    </tr>  
+  </table>

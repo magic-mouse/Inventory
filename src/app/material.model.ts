@@ -6,6 +6,12 @@ export interface Material {
     unit: string;
     location: string;
     description: string;
-    created_at?: string; // optional because it's automatically handled by the database
+    price: number;
+    created_at?: string;
   }
   
+  export interface Category {
+    id?: number;
+    name: string;
+    created_at?: string; 
+  }

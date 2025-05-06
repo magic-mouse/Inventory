@@ -18,6 +18,7 @@ export class AddItemComponent {
       name: [''],
       category: [''],
       quantity: [0],
+      price: [0],
       unit: [''],
       location: [''],
       description: ['']

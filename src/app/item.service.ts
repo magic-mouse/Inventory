@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createClient } from '@supabase/supabase-js';
-import { Material } from './material.model';
+import { Material, Category } from './material.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,4 +26,27 @@ export class ItemService {
       .from('materials')
       .insert([material]);
   }
+
+  async addCategory(category: Category) {
+    return await this.supabase.from('category')
+    .insert([category])
+  }
+
+  async addAttribute(attribute: { name: string; type: string }) {
+    return this.supabase.from('attributes').insert(attribute);
+  }
+
+  async getAttributes(type: string) {
+    return this.supabase.from('attributes').select('*').eq('type', type);
+  }
+
+  getAttribute(type: string, id: number) {
+    return this.supabase.from('attributes').select('*').eq('type', type).eq('id', id).single();
+  }
+  
+  updateAttribute(type: string, id: number, data: any) {
+    return this.supabase.from('attributes').update(data).eq('type', type).eq('id', id);
+  }
+  
+  
 }

@@ -8,3 +8,4 @@ CREATE TABLE materials (
     description TEXT,                         -- Optional notes or details
     created_at TIMESTAMP DEFAULT now()        -- Timestamp for tracking when added
 );
+ALTER TABLE materials ADD COLUMN price NUMERIC(10, 2);
