@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../../item.service'; 
 import { Material } from '../../material.model'; 
 import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
 
 
 @Component({
   selector: 'app-material-form',
   standalone: true,
-  imports: [ CommonModule ],
+  imports: [ CommonModule , TableModule],
   providers: [],
   templateUrl: './material-form.component.html',
   styleUrls: ['./material-form.component.scss']

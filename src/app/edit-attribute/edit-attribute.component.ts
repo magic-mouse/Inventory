@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ItemService } from '../item.service';
 import { CommonModule } from '@angular/common';
+import { Attribute } from '../material.model';
 
 @Component({
   selector: 'app-edit-attribute',
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
 export class EditAttributeComponent implements OnInit {
   type: 'category' | 'unit' | 'location' = 'category';
   id!: number;
+  name: string = '';
   attributeForm: FormGroup;
 
   constructor(
@@ -22,7 +24,7 @@ export class EditAttributeComponent implements OnInit {
     private items: ItemService
   ) {
     this.attributeForm = this.fb.group({
-      name: ['', Validators.required]
+      name: [this.name, Validators.required]
     });
   }
 
@@ -31,12 +33,17 @@ export class EditAttributeComponent implements OnInit {
       this.type = params.get('type') as any;
       this.id = +(params.get('id') || 0);
 
-      const result = await this.items.getAttribute(this.type, this.id);
-      if (result) {
-       console.log(result);
-      } else {
-        alert('Failed to load data');
-      }
+      this.items.getAttribute(this.type, this.id)
+      .then((result) => {
+        if (result.error) {
+          alert(`Failed to load ${this.type}: ${result.error.message}`);
+          return;
+        }
+        this.attributeForm.patchValue({
+          name: result.data.name
+        });
+        this.name = result.data.name;
+      });
     });
   }
 

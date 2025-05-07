@@ -1,5 +1,11 @@
-<table class="material-table">
-  <thead>
+<p-table [value]="materials" [tableStyle]="{ 'min-width': '60rem' }">
+  <ng-template #caption>
+      <div class="flex items-center justify-between">
+          <span class="text-xl font-bold">Products</span>
+         
+      </div>
+  </ng-template>
+  <ng-template #header>
     <tr>
       <th>Name</th>
       <th>Category</th>
@@ -12,9 +18,9 @@
       <th>Added On</th>
       <th>Actions</th>
     </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let material of materials">
+  </ng-template>
+  <ng-template #body let-material>
+    <tr>
       <td>{{ material.name }}</td>
       <td>{{ material.category?.name ?? 'NC' }}</td>
       <td>{{ material.quantity }}</td>
@@ -28,8 +34,10 @@
         <button class="edit-btn" (click)="editMaterial(material)">Edit</button>
       </td>
     </tr>
+</ng-template>
 
-    <!-- Summary row -->
+  
+  <ng-template #footer>    <!-- Summary row -->
     <tr class="summary-row">
       <td colspan="2"><strong>Totals:</strong></td>
       <td><strong>{{ totalQuantity() }}</strong></td>
@@ -38,5 +46,5 @@
       <td><strong>{{ totalValue() | currency }}</strong></td>
       <td colspan="4"></td>
     </tr>
-  </tbody>
-</table>
+  </ng-template>
+</p-table>

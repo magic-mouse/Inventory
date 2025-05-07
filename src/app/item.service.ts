@@ -41,7 +41,7 @@ export class ItemService {
     return this.supabase.from('attributes').select('*').eq('type', type);
   }
 
-  getAttribute(type: string, id: number) {
+  getAttribute(type: string, id: number)  {
     return this.supabase.from('attributes').select('*').eq('type', type).eq('id', id).single();
   }
 
