@@ -22,11 +22,6 @@ export class AppComponent {
       routerLink: '/'
     },
     {
-      label: '📦 Items',
-      icon: 'pi pi-fw pi-box',
-      routerLink: '/item'
-    },
-    {
       label: 'Add',
       icon: 'pi pi-fw pi-plus-circle',
       items: [
